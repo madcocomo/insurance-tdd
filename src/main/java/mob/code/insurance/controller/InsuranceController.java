@@ -1,8 +1,10 @@
 package mob.code.insurance.controller;
 
 import mob.code.insurance.bean.Assured;
+import mob.code.insurance.dto.Portfolio;
 import mob.code.insurance.dto.ProposalParam;
 import mob.code.insurance.repo.AssuredRepository;
+import mob.code.insurance.repo.PlanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +15,17 @@ import java.util.List;
 public class InsuranceController {
     @Autowired
     private AssuredRepository assuredRepository;
+    @Autowired
+    private PlanRepository planRepository;
 
     @GetMapping("ping")
     public String ping() {
         return "pong";
+    }
+
+    @GetMapping("portfolio/{code}")
+    public Portfolio portfolio(@PathVariable String code) {
+        return new Portfolio().setPlans(planRepository.findByPortfolioCode(code));
     }
 
     @PostMapping(value = "proposal")
