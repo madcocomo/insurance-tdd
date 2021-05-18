@@ -20,7 +20,10 @@ public class Plan {
     private Long id;
 
     private String portfolioCode;
+    private String portfolioId;
     private String name;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Product> products = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PremiumDefinition> premiums = new ArrayList<>();
 }

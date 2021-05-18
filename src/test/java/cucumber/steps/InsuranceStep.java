@@ -77,8 +77,8 @@ public class InsuranceStep {
         response = RestfulHelper.connect(port).get("/portfolio/" + portfolioCode);
     }
 
-    @当("客户选择计划:")
-    public void selectProposal(String data) {
+    @当("客户选择组合:")
+    public void selectPortfolio(String data) {
         response = RestfulHelper.connect(port).post("/proposal", data);
     }
 
@@ -106,7 +106,7 @@ public class InsuranceStep {
         planRepository.deleteAll();
     }
 
-    @假如("定义有保险计划:")
+    @假如("定义有保险组合:")
     public void existPlan(Plan plan) {
         planRepository.save(plan);
     }

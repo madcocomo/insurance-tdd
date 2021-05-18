@@ -8,5 +8,6 @@ import java.util.List;
 public interface PlanRepository extends Repository<Plan, Long> {
     Plan save(Plan plan);
     List<Plan> findByPortfolioCode(String code);
+    Plan findByPortfolioId(String id);
     void deleteAll();
 }

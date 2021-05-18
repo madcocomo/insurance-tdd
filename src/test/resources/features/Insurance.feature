@@ -2,11 +2,16 @@
 功能: 投保
 
   背景: 基础产品数据
-    假如定义有保险计划:
+    假如定义有保险组合:
     """
     {
       "portfolioCode": "XUEPING",
+      "portfolioId": "XP01",
       "name": "基础版",
+      "premiums": [
+        {"ageMin": 0, "ageMax": 2, "premium": 28},
+        {"ageMin": 3, "ageMax": 25, "premium": 9}
+      ],
       "products": [
         {
           "code": 787,
@@ -34,10 +39,11 @@
       ]
     }
     """
-    并且定义有保险计划:
+    并且定义有保险组合:
     """
     {
       "portfolioCode": "XUEPING",
+      "portfolioId": "XP02",
       "name": "经典版",
       "products": [
         {
@@ -73,7 +79,6 @@
 
 
   场景: 显示保险组合
-
     当为客户展示保险组合"XUEPING"
     那么服务将会响应:
     """
@@ -139,22 +144,14 @@
     }
     """
 
-  场景: 保险计划试算
-    假如存在被保险人:
-      | name | age |
-      | 张三  | 1   |
-    当客户选择计划:
+  场景: 保费试算
+    当客户选择组合:
     """
-    {"planId": "78701"}
+    {"portfolioId": "XP01", "insurer":{"name": "张三", "birthday": "2020-04-10"}}
     """
     那么服务将会响应:
     """
     {
-      benefits: [
-        { prodId: "787", fee: 5, insured: 60000},
-        { prodId: "784", fee: 1, insured: 10000},
-        { prodId: "788", fee: 22, insured: 20000}
-      ],
-      summary: {fee: 28}
+      premium: 28
     }
     """

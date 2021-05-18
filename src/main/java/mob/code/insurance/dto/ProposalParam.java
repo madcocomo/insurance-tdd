@@ -5,5 +5,5 @@ import lombok.Setter;
 
 @Setter @Getter
 public class ProposalParam {
-    String planId;
+    String portfolioId;
 }
